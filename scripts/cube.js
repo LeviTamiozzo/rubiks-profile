@@ -4,109 +4,39 @@ const buttons = document.querySelectorAll('nav ul li');
 function buildCube() {
 	const template = document.getElementById('cube-template').content;
 
-	// Build Middles
-	cubeSides.middles.forEach((mid) => {
-		const clone = document.importNode(template, true);
-		const cubeLayer = clone.querySelector('.cube-layer');
-		const positionCubie = cubeLayer.querySelector('.cubie');
-		const orientationCubie = positionCubie.querySelector('.cubie');
-		const frontFace = orientationCubie.querySelector('.face-f');
+	// Build Cubes
+	for (const pos in cubeSides) {
+		cubeSides[pos].forEach((position) => {
+			const clone = document.importNode(template, true);
+			const cubeLayer = clone.querySelector('.cube-layer');
+			const positionCubie = cubeLayer.querySelector('.cubie');
 
-		// Set id
-		cubeLayer.setAttribute('id', `${mid}`);
+			// Set id
+			cubeLayer.setAttribute('id', `${position.id}`);
+			if (pos == 'middles') {
+				cubeLayer.classList.add('middle');
+			}
 
-		// Set position
-		positionCubie.classList.add(`cubie-middle-${mid}`);
+			// Set position
+			positionCubie.style.transform = `translate3d(${position.initialCoords.x ? position.initialCoords.x : 0}px,
+				${position.initialCoords.y ? position.initialCoords.y : 0}px,
+				${position.initialCoords.z ? position.initialCoords.z : 0}px)`;
+			cubeLayer.setAttribute('data-current-position', position.id);
 
-		// Set orientation and rotation
-		orientationCubie.classList.add(`cubie-middle-orientation-${mid}`);
+			// Set sticker faces
+			[...position.id].forEach((position) => {
+				const face = positionCubie.querySelector(`.cubie-face.face-${position}`);
 
-		// Set sticker faces
-		frontFace.classList.add('cubie-sticker', `sticker-${mid}`);
+				face.classList.add('cubie-sticker', `sticker-${position}`);
 
-		const innerSticker = document.createElement('div');
-		innerSticker.classList.add('inner-sticker');
-		frontFace.appendChild(innerSticker);
+				const innerSticker = document.createElement('div');
+				innerSticker.classList.add('inner-sticker');
+				face.appendChild(innerSticker);
+			});
 
-		cube.appendChild(cubeLayer);
-	});
-
-	// Build Corners
-	var cornerPosition = 0;
-	cubeSides.corners.forEach((corner) => {
-		const side1 = corner[0];
-		const side2 = corner[1];
-		const side3 = corner[2];
-
-		const clone = document.importNode(template, true);
-		const cubeLayer = clone.querySelector('.cube-layer');
-		const positionCubie = cubeLayer.querySelector('.cubie');
-		const orientationCubie = positionCubie.querySelector('.cubie');
-		const faces = orientationCubie.querySelectorAll('.cubie-face');
-
-		// Set id
-		cubeLayer.setAttribute('id', `${side1}${side2}${side3}`);
-
-		// Set position
-		positionCubie.classList.add(`cubie-corner-position-${cornerPosition}`);
-		cornerPosition++;
-
-		// Set orientation
-		orientationCubie.classList.add('cubie-corner-orientation-0');
-
-		// Set sticker faces
-		faces[0].classList.add('cubie-sticker', `sticker-${side1}`);
-		faces[1].classList.add('cubie-sticker', `sticker-${side2}`);
-		faces[2].classList.add('cubie-sticker', `sticker-${side3}`);
-
-		const innerSticker = document.createElement('div');
-		innerSticker.classList.add('inner-sticker');
-		faces[0].appendChild(innerSticker);
-
-		const innerSticker2 = document.importNode(innerSticker, true);
-		faces[1].appendChild(innerSticker2);
-
-		const innerSticker3 = document.importNode(innerSticker, true);
-		faces[2].appendChild(innerSticker3);
-
-		cube.appendChild(cubeLayer);
-	});
-
-	// Build Edges
-	var edgePosition = 0;
-	cubeSides.edges.forEach((edge) => {
-		const side1 = edge[0];
-		const side2 = edge[1];
-
-		const clone = document.importNode(template, true);
-		const cubeLayer = clone.querySelector('.cube-layer');
-		const positionCubie = cubeLayer.querySelector('.cubie');
-		const orientationCubie = positionCubie.querySelector('.cubie');
-		const faces = orientationCubie.querySelectorAll('.cubie-face');
-
-		// Set id
-		cubeLayer.setAttribute('id', `${side1}${side2}`);
-
-		// Set position
-		positionCubie.classList.add(`cubie-edge-position-${edgePosition}`);
-		edgePosition++;
-
-		// Set orientation
-		orientationCubie.classList.add('cubie-edge-orientation-0');
-
-		// Set sticker faces
-		faces[0].classList.add('cubie-sticker', `sticker-${side1}`);
-		faces[1].classList.add('cubie-sticker', `sticker-${side2}`);
-
-		const innerSticker = document.createElement('div');
-		innerSticker.classList.add('inner-sticker');
-		faces[0].appendChild(innerSticker);
-
-		const innerSticker2 = document.importNode(innerSticker, true);
-		faces[1].appendChild(innerSticker2);
-
-		cube.appendChild(cubeLayer);
-	});
+			cube.appendChild(cubeLayer);
+		});
+	}
 
 	addCubeContent();
 }
@@ -125,6 +55,8 @@ function addCubeContent() {
 				img.src = cont.imgSrc;
 				innerSticker.appendChild(img);
 			}
+
+			innerSticker.setAttribute('tooltip', cont.tooltip)
 		});
 	}
 }
@@ -133,121 +65,59 @@ buildCube();
 
 /** Adds classes to cubies to start animation. */
 function move(turn) {
-	const side = turn[0];
-	const layer = layers[turn[0]];
-	var cubies = [];
+	const move = turn[0];
+	var step = turn[1];
+	var step = (step & 3) == 3 ? -1 : step & 3;
+	step = rotationsCoords[move].reverse ? step * -1 : step;
 
-	// Push middles
-	if (!layer.middles) {
-		const m = document.querySelector(`.cubie-middle-${side}`);
-		cubies.push(m.parentNode);
-	}
+	const cubies = document.querySelectorAll(`.cube-layer[data-current-position*="${move}"]`);
 
-	layer.middles?.forEach((mid) => {
-		const e = document.querySelector(`.cubie-middle-${mid}`);
-		cubies.push(e.parentNode);
-	});
+	cubies.forEach((cube) => {
+		var cubeStep = step;
+		const currentPosition = cube.dataset.currentPosition;
+		const currentAxis = rotationsCoords[move].axis;
 
-	// Push corners
-	layer.corners?.forEach((corner) => {
-		const c = document.querySelector(`.cubie-corner-position-${corner}`);
-		cubies.push(c.parentNode);
-	});
+		const cubeRotationCoords = {
+			x: cube.dataset.x ?? 0,
+			y: cube.dataset.y ?? 0,
+			z: cube.dataset.z ?? 0,
+		};
+		
+		const isCorner = currentPosition.length == 3;
+		const isEdge = currentPosition.length == 2;
+		const isMiddle = currentPosition.length == 1;
+		const is180DegRotated = (cubeRotationCoords.x & 3) == 2;
+		const is90DegRotated = (cubeRotationCoords.x & 3) == 1;
 
-	// Push edges
-	layer.edges.forEach((edge) => {
-		const e = document.querySelector(`.cubie-edge-position-${edge}`);
-		cubies.push(e.parentNode);
-	});
-
-	// Add classes
-	cubies.forEach((cubie) => {
-		cubie.classList.add('turn');
-		cubie.classList.add(`turn-${turn}`);
-	});
-}
-
-/**	Updates classes of cubie. This should be called on completion of
-	animation for every cubie that was involved in animation. */
-function updateCubie() {
-	var match = this.className.match(/turn\-(..)/);
-	this.classList.remove('turn');
-	this.classList.remove(match[0]);
-
-	const step = +match[1][1];
-	const side = match[1][0];
-	const layer = layers[side];
-	var div = this.children[0];
-
-	var re = /(cubie-corner-position-)(\d+)/;
-	if ((match = div.className.match(re))) {
-		const idx = layer.corners.indexOf(+match[2]);
-		var newVal = layer.corners[(idx + step) & 3];
-		div.className = div.className.replace(re, '$1' + newVal);
-
-		div = div.children[0];
-		re = /(cubie-corner-orientation-)(\d+)/;
-		match = div.className.match(re);
-		newVal = (+match[2] + (side != 'u' && side != 'd') * (step & 1) * (1 + (idx & 1))) % 3;
-		div.className = div.className.replace(re, '$1' + newVal);
-	}
-
-	re = /(cubie-edge-position-)(\d+)/;
-	if ((match = div.className.match(re))) {
-		const idx = layer.edges.indexOf(+match[2]);
-		var newVal = layer.edges[(idx + step) & 3];
-		div.className = div.className.replace(re, '$1' + newVal);
-
-		div = div.children[0];
-		re = /(cubie-edge-orientation-)(\d+)/;
-		match = div.className.match(re);
-		newVal = +match[2] ^ ((side == 'f' || side == 'b' || side == 'm' || side == 'e' || side == 's') & step);
-		div.className = div.className.replace(re, '$1' + newVal);
-	}
-
-	if (side == 'm' || side == 'e' || side == 's') {
-		div = this.children[0];
-		re = /(cubie-middle-)([a-z]+)/;
-		if ((match = div.className.match(re))) {
-			const idx = layer.middles.indexOf(match[2]);
-			var newVal = layer.middles[(idx + step) & 3];
-			div.className = div.className.replace(re, '$1' + newVal);
-
-			div = div.children[0];
-			re = /(cubie-middle-orientation-)(\D+)/;
-			match = div.className.match(re);
-			div.className = div.className.replace(re, '$1' + newVal);
+		if (is180DegRotated) {
+			cubeStep = step * -1;
 		}
-	}
+
+		if (is90DegRotated) {
+			console.log('hola');
+		}
+
+		cubeRotationCoords[currentAxis] = parseInt(cubeRotationCoords[currentAxis]) + cubeStep;
+
+		cube.style.transform = `rotateX(${cubeRotationCoords.x * 90}deg) rotateY(${cubeRotationCoords.y * 90}deg) rotateZ(${cubeRotationCoords.z * 90}deg)`;
+		cube.setAttribute(`data-${currentAxis}`, cubeRotationCoords[currentAxis]);
+
+		if (isCorner) {
+			const index = rotationsCoords[move].corners.indexOf(currentPosition);
+			const newPosition = rotationsCoords[move].corners[(index + step) & 3];
+			cube.setAttribute('data-current-position', newPosition);
+		}
+
+		if (isEdge) {
+			const index = rotationsCoords[move].edges.indexOf(currentPosition);
+			const newPosition = rotationsCoords[move].edges[(index + step) & 3];
+			cube.setAttribute('data-current-position', newPosition);
+		}
+	});
 }
-
-/**	Generates and executes random move */
-var nextMove = (function () {
-	var prevSide = '';
-	var sides = ['u', 'f', 'r', 'l', 'b', 'd', 'm', 'e', 's'];
-	return function () {
-		if (document.querySelector('.cube-layer.turn')) return;
-		var side = prevSide;
-		while (side == prevSide) side = sides[(Math.random() * 8) | 0];
-		var step = 1 + ((Math.random() * 3) | 0);
-		setTimeout(function () {
-			move(`${side}${step}`);
-		}, 10);
-		prevSide = side;
-	};
-})();
-
-(function () {
-	// add `transitionend` listeners for updating classes and starting next move
-	var layerDivs = document.querySelectorAll('.cube-layer');
-	for (var i = 0; i < layerDivs.length; ++i) {
-		layerDivs[i].addEventListener('transitionend', updateCubie, true);
-		// layerDivs[i].addEventListener('transitionend', nextMove, true);
-	}
-})();
 
 buttons.forEach((button) =>
 	button.addEventListener('click', () => {
-		move(`${button.dataset.face}1`);
+		move(`${button.dataset.face}`);
 	})
 );

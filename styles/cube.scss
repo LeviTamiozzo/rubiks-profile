@@ -21,372 +21,9 @@ $white: #fffbff;
 		.cube-layer {
 			transform-style: preserve-3d;
 			transform-origin: 50px 50px;
+			transition: transform 0.8s cubic-bezier(0.445, 0.05, 0.55, 0.95);
 
-			&.turn {
-                transition: transform 0.8s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-			}
-
-			&.turn-u1,
-			&.turn-d3 {
-				transform: rotateY(-90deg);
-			}
-			&.turn-f1,
-			&.turn-b3 {
-				transform: rotateZ(90deg);
-			}
-			&.turn-r1,
-			&.turn-l3 {
-				transform: rotateX(90deg);
-			}
-			&.turn-l1,
-			&.turn-r3 {
-				transform: rotateX(-90deg);
-			}
-			&.turn-b1,
-			&.turn-f3 {
-				transform: rotateZ(-90deg);
-			}
-			&.turn-d1,
-			&.turn-u3 {
-				transform: rotateY(90deg);
-			}
-			&.turn-u2 {
-				transform: rotateY(-180deg);
-			}
-			&.turn-f2 {
-				transform: rotateZ(180deg);
-			}
-			&.turn-r2 {
-				transform: rotateX(180deg);
-			}
-			&.turn-l2 {
-				transform: rotateX(-180deg);
-			}
-			&.turn-b2 {
-				transform: rotateZ(-180deg);
-			}
-			&.turn-d2 {
-				transform: rotateY(180deg);
-			}
-			&.turn-m1 {
-				transform: rotateX(-90deg);
-			}
-			&.turn-m2 {
-				transform: rotateX(180deg);
-			}
-			&.turn-m3 {
-				transform: rotateX(-90deg);
-			}
-			&.turn-e1 {
-				transform: rotateY(90deg);
-			}
-			&.turn-e2 {
-				transform: rotateY(180deg);
-			}
-			&.turn-e3 {
-				transform: rotateY(-90deg);
-			}
-			&.turn-s1 {
-				transform: rotateZ(90deg);
-			}
-			&.turn-s2 {
-				transform: rotateZ(180deg);
-			}
-			&.turn-s3 {
-				transform: rotateZ(-90deg);
-			}
-		}
-
-		.cubie {
-			transform-style: preserve-3d;
-			transform-origin: 50px 50px;
-
-			&.cubie-corner-position-0 {
-				transform: translate3d(100px, -100px, 100px);
-
-				.cubie-corner-orientation-2 {
-					.face-u .inner-sticker img {
-						transform: rotateZ(90deg);
-					}
-				}
-			}
-			&.cubie-corner-position-1 {
-				transform: translate3d(-100px, -100px, 100px) rotateY(-90deg);
-
-				.face-u .inner-sticker img {
-					transform: rotateZ(-90deg);
-				}
-
-				.cubie-corner-orientation-1 {
-					.face-u .inner-sticker img {
-						transform: rotateZ(-180deg);
-					}
-				}
-
-				.cubie-corner-orientation-2 {
-					.face-u .inner-sticker img {
-						transform: rotateZ(90deg);
-					}
-				}
-			}
-			&.cubie-corner-position-2 {
-				transform: translate3d(100px, -100px, -100px) rotateY(90deg);
-
-				.face-u .inner-sticker img {
-					transform: rotateZ(90deg);
-				}
-			}
-			&.cubie-corner-position-3 {
-				transform: translate3d(-100px, -100px, -100px) rotateY(180deg);
-
-				.face-u .inner-sticker img {
-					transform: rotateZ(-180deg);
-				}
-			}
-			&.cubie-corner-position-4 {
-				transform: translate3d(100px, 100px, 100px) rotateX(180deg) rotateY(90deg);
-			}
-			&.cubie-corner-position-5 {
-				transform: translate3d(-100px, 100px, 100px) rotateX(180deg) rotateY(180deg);
-
-				.cubie-corner-orientation-2 {
-					.face-u .inner-sticker img {
-						transform: rotateZ(-90deg);
-					}
-				}
-			}
-			&.cubie-corner-position-6 {
-				transform: translate3d(100px, 100px, -100px) rotateX(180deg);
-			}
-			&.cubie-corner-position-7 {
-				transform: translate3d(-100px, 100px, -100px) rotateX(180deg) rotateY(-90deg);
-
-				.cubie-corner-orientation-2 {
-					.face-u .inner-sticker img {
-						transform: rotateZ(-90deg);
-					}
-				}
-			}
-
-			&.cubie-corner-orientation-0 {
-			}
-
-			&.cubie-corner-orientation-1 {
-				transform: rotateY(-90deg) rotateX(90deg);
-			}
-			&.cubie-corner-orientation-2 {
-				transform: rotateY(90deg) rotateZ(-90deg);
-			}
-
-			&.cubie-edge-position-0 {
-				transform: translate3d(0px, -100px, 100px);
-
-				.cubie-edge-orientation-1 {
-					.face-u .inner-sticker img {
-						transform: rotateZ(180deg);
-					}
-				}
-			}
-			&.cubie-edge-position-1 {
-				transform: translate3d(-100px, -100px, 0px) rotateY(-90deg);
-
-				.face-u .inner-sticker img {
-					transform: rotateZ(-90deg);
-				}
-
-				.cubie-edge-orientation-1 {
-					.face-u .inner-sticker img {
-						transform: rotateZ(180deg);
-					}
-				}
-			}
-			&.cubie-edge-position-2 {
-				transform: translate3d(100px, -100px, 0px) rotateY(90deg);
-
-				.face-u .inner-sticker img {
-					transform: rotateZ(90deg);
-				}
-			}
-			&.cubie-edge-position-3 {
-				transform: translate3d(0px, -100px, -100px) rotateY(180deg);
-
-				.face-u .inner-sticker img {
-					transform: rotateZ(-180deg);
-				}
-			}
-			&.cubie-edge-position-4 {
-				transform: translate3d(0px, 100px, 100px) rotateX(180deg) rotateY(180deg);
-			}
-			&.cubie-edge-position-5 {
-				transform: translate3d(-100px, 100px, 0px) rotateX(180deg) rotateY(-90deg);
-			}
-			&.cubie-edge-position-6 {
-				transform: translate3d(100px, 100px, 0px) rotateX(180deg) rotateY(90deg);
-			}
-			&.cubie-edge-position-7 {
-				transform: translate3d(0px, 100px, -100px) rotateX(180deg);
-			}
-			&.cubie-edge-position-8 {
-				transform: translate3d(100px, 0px, 100px) rotateX(-90deg) rotateY(90deg);
-
-				.face-u .inner-sticker img {
-					transform: rotateZ(90deg);
-				}
-			}
-			&.cubie-edge-position-9 {
-				transform: translate3d(-100px, 0px, 100px) rotateX(-90deg) rotateY(-90deg);
-
-				.face-u .inner-sticker img {
-					transform: rotateZ(-90deg);
-				}
-			}
-			&.cubie-edge-position-10 {
-				transform: translate3d(100px, 0px, -100px) rotateX(90deg) rotateY(90deg);
-			}
-			&.cubie-edge-position-11 {
-				transform: translate3d(-100px, 0px, -100px) rotateX(90deg) rotateY(-90deg);
-
-				.cubie-edge-orientation-1 {
-					.face-u .inner-sticker img {
-						transform: rotateZ(-90deg);
-					}
-				}
-			}
-
-			&.cubie-edge-orientation-0 {
-			}
-			&.cubie-edge-orientation-1 {
-				transform: rotateX(-90deg) rotateY(180deg);
-			}
-
-			&.cubie-middle-orientation-f {
-			}
-			&.cubie-middle-orientation-r {
-				transform: rotateY(90deg);
-			}
-			&.cubie-middle-orientation-b {
-				transform: rotateY(180deg);
-			}
-			&.cubie-middle-orientation-l {
-				transform: rotateY(-90deg);
-			}
-			&.cubie-middle-orientation-u {
-				transform: rotateX(90deg);
-			}
-			&.cubie-middle-orientation-d {
-				transform: rotateX(-90deg);
-			}
-
-			&.cubie-middle-r {
-				transform: translate3d(100px, 0px, 0px);
-			}
-			&.cubie-middle-l {
-				transform: translate3d(-100px, 0px, 0px);
-			}
-			&.cubie-middle-f {
-				transform: translate3d(0px, 0px, 100px);
-			}
-			&.cubie-middle-b {
-				transform: translate3d(0px, 0px, -100px);
-			}
-			&.cubie-middle-u {
-                transform: translate3d(0px, -100px, 0px);            
-			}
-			&.cubie-middle-d {
-				transform: translate3d(0px, 100px, 0px);
-			}
-
-			.cubie-face {
-				position: absolute;
-				width: 100px;
-				height: 100px;
-				background-color: black;
-				transform-style: preserve-3d;
-				backface-visibility: hidden;
-				border-radius: 5px;
-
-				&.face-u {
-					transform: rotateX(90deg) translateZ(50px);
-				}
-				&.face-f {
-					transform: translateZ(50px);
-				}
-				&.face-r {
-					transform: rotateY(90deg) translateZ(50px);
-				}
-				&.face-l {
-					transform: rotateY(-90deg) translateZ(50px);
-				}
-				&.face-b {
-					transform: rotateY(180deg) translateZ(50px);
-				}
-				&.face-d {
-					transform: rotateX(-90deg) translateZ(50px);
-				}
-
-				&.cubie-sticker {
-					background-color: black;
-					background-size: 600px 100px;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-				}
-
-				&.sticker-u .inner-sticker {
-					background-color: $yellow;
-				}
-				&.sticker-f .inner-sticker {
-					background-color: $red;
-				}
-				&.sticker-r .inner-sticker {
-					background-color: $green;
-				}
-				&.sticker-l .inner-sticker {
-					background-color: $blue;
-				}
-				&.sticker-b .inner-sticker {
-					background-color: $orange;
-				}
-				&.sticker-d .inner-sticker {
-					background-color: $white;
-				}
-
-				&.sticker-u {
-					background-position-x: 0;
-				}
-				&.sticker-f {
-					background-position-x: -100px;
-				}
-				&.sticker-r {
-					background-position-x: -200px;
-				}
-				&.sticker-l {
-					background-position-x: -300px;
-				}
-				&.sticker-b {
-					background-position-x: -400px;
-				}
-				&.sticker-d {
-					background-position-x: -500px;
-				}
-
-				.inner-sticker {
-                    position: absolute;
-					width: 90%;
-					height: 90%;
-					border-radius: 5px;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-
-					img {
-						max-width: 70%;
-                        max-height: 70%;
-					}
-				}
-			}
-
-			[class*='cubie-middle'] .cubie-sticker::before {
+			&.middle .cubie-sticker::before {
 				position: absolute;
 				transform-style: preserve-3d;
 				font-size: 30px;
@@ -398,6 +35,123 @@ $white: #fffbff;
 				font-weight: 600;
 				content: attr(title);
 				transition: transform 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+				pointer-events: none;
+			}
+
+			.cubie {
+				transform-style: preserve-3d;
+				transform-origin: 50px 50px;
+
+				.cubie-face {
+					position: absolute;
+					width: 100px;
+					height: 100px;
+					background-color: black;
+					transform-style: preserve-3d;
+					backface-visibility: hidden;
+					border-radius: 5px;
+
+					&.face-u {
+						transform: rotateX(90deg) translateZ(50px);
+					}
+					&.face-f {
+						transform: translateZ(50px);
+					}
+					&.face-r {
+						transform: rotateY(90deg) translateZ(50px);
+					}
+					&.face-l {
+						transform: rotateY(-90deg) translateZ(50px);
+					}
+					&.face-b {
+						transform: rotateY(180deg) translateZ(50px);
+					}
+					&.face-d {
+						transform: rotateX(-90deg) translateZ(50px);
+					}
+
+					&.cubie-sticker {
+						background-color: black;
+						background-size: 600px 100px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+					}
+
+					&.sticker-u .inner-sticker {
+						background-color: $yellow;
+					}
+					&.sticker-f .inner-sticker {
+						background-color: $red;
+					}
+					&.sticker-r .inner-sticker {
+						background-color: $green;
+					}
+					&.sticker-l .inner-sticker {
+						background-color: $blue;
+					}
+					&.sticker-b .inner-sticker {
+						background-color: $orange;
+					}
+					&.sticker-d .inner-sticker {
+						background-color: $white;
+					}
+
+					&.sticker-u {
+						background-position-x: 0;
+					}
+					&.sticker-f {
+						background-position-x: -100px;
+					}
+					&.sticker-r {
+						background-position-x: -200px;
+					}
+					&.sticker-l {
+						background-position-x: -300px;
+					}
+					&.sticker-b {
+						background-position-x: -400px;
+					}
+					&.sticker-d {
+						background-position-x: -500px;
+					}
+
+					.inner-sticker {
+						position: absolute;
+						width: 90%;
+						height: 90%;
+						border-radius: 5px;
+						display: flex;
+						align-items: center;
+						justify-content: center;						
+						transition: transform 0.2s ease-in-out;						
+
+						img {
+							max-width: 70%;
+							max-height: 70%;
+						}
+					}
+				}
+			}
+
+			&[data-current-position*="f"] .inner-sticker {
+				cursor: pointer;
+
+				&:hover {
+					transform: scale(1.07);
+				}
+
+				&:hover::before {
+					position: absolute;
+					content: attr(tooltip);
+					line-height: 30px;
+					background-color: black;
+					opacity: 0.7;
+					z-index: 3;
+					color: white;
+					border-radius: 5px;
+					padding: 0 5px;
+				}
 			}
 		}
 	}
