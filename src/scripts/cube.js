@@ -1,7 +1,6 @@
-﻿const cube = document.querySelector('.cube');
-const buttons = document.querySelectorAll('nav ul li');
+﻿import { layers, content, cubeSides } from './data';
 
-function buildCube() {
+export function buildCube(cube) {
 	const template = document.getElementById('cube-template').content;
 
 	// Build Middles
@@ -108,31 +107,29 @@ function buildCube() {
 		cube.appendChild(cubeLayer);
 	});
 
-	addCubeContent();
+	addCubeContent(cube);
 }
 
-function addCubeContent() {
-	for (const face in faces) {
-		const faceObject = faces[face];
-		const middleCubieSticker = document.getElementById(`${face}`).querySelector('.cubie-sticker');
+function addCubeContent(cube) {
+	for (const face in content) {
+		const faceObject = content[face];
+		const middleCubieSticker = cube.querySelector(`#${face} .cubie-sticker`);
 		middleCubieSticker.setAttribute('title', faceObject.title);
 
-		faceObject.content?.forEach((cont) => {
-			const innerSticker = document.getElementById(cont.cubie).querySelector(`.sticker-${cont.face} .inner-sticker`);
+		faceObject.cubies?.forEach((cubie) => {
+			const innerSticker = cube.querySelector(`#${cubie.cubie} .sticker-${cubie.face} .inner-sticker`);
 
-			if (cont.imgSrc) {
+			if (cubie.imgSrc) {
 				var img = document.createElement('img');
-				img.src = cont.imgSrc;
+				img.src = cubie.imgSrc;
 				innerSticker.appendChild(img);
 			}
 		});
 	}
 }
 
-buildCube();
-
 /** Adds classes to cubies to start animation. */
-function move(turn) {
+export function doMove(turn) {
 	const side = turn[0];
 	const layer = layers[turn[0]];
 	var cubies = [];
@@ -169,7 +166,7 @@ function move(turn) {
 
 /**	Updates classes of cubie. This should be called on completion of
 	animation for every cubie that was involved in animation. */
-function updateCubie() {
+export function updateCubie() {
 	var match = this.className.match(/turn\-(..)/);
 	this.classList.remove('turn');
 	this.classList.remove(match[0]);
@@ -236,18 +233,3 @@ var nextMove = (function () {
 		prevSide = side;
 	};
 })();
-
-(function () {
-	// add `transitionend` listeners for updating classes and starting next move
-	var layerDivs = document.querySelectorAll('.cube-layer');
-	for (var i = 0; i < layerDivs.length; ++i) {
-		layerDivs[i].addEventListener('transitionend', updateCubie, true);
-		// layerDivs[i].addEventListener('transitionend', nextMove, true);
-	}
-})();
-
-buttons.forEach((button) =>
-	button.addEventListener('click', () => {
-		move(`${button.dataset.face}1`);
-	})
-);

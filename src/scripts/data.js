@@ -15,7 +15,17 @@ corners  _.-'-._                 edges    _.-'-._
 U       F        R       L       B       D
 up    front    right    left    back    down
 */
-const layers = {
+import '../assets/png/git.png';
+import '../assets/png/photoshop.png';
+import '../assets/png/javascript.png';
+import '../assets/png/html5.png';
+import '../assets/png/css3.png';
+import '../assets/png/angular.png';
+import '../assets/png/sass.png';
+import '../assets/png/webpack.png';
+import '../assets/png/illustrator.png';
+
+export const layers = {
 	u: { corners: [0, 1, 3, 2], edges: [0, 1, 3, 2] },
 	f: { corners: [1, 0, 4, 5], edges: [0, 8, 4, 9] },
 	r: { corners: [0, 2, 6, 4], edges: [6, 8, 2, 10] },
@@ -27,7 +37,7 @@ const layers = {
 	s: { middles: ['r', 'd', 'l', 'u'], edges: [6, 5, 1, 2] }
 };
 
-const faces = {
+export const content = {
 	f: {
 		title: 'ABOUT',
 	},
@@ -42,51 +52,51 @@ const faces = {
 	},
 	u: {
 		title: 'SKILLS',
-		content: [
+		cubies: [
 			{
 				cubie: 'ufr',
 				face: 'u',
-				imgSrc: './assets/png/git.png',
+				imgSrc: './imgs/git.png',
             },
             {
                 cubie: 'ulf',
                 face: 'u',
-                imgSrc: './assets/png/photoshop.png'
+                imgSrc: './imgs/photoshop.png'
             },
             {
                 cubie: 'urb',
                 face: 'u',
-                imgSrc: './assets/png/javascript.png'
+                imgSrc: './imgs/javascript.png'
             },
             {
                 cubie: 'ubl',
                 face: 'u',
-                imgSrc: './assets/png/html5.png'
+                imgSrc: './imgs/html5.png'
             },
             {
                 cubie: 'ub',
                 face: 'u',
-                imgSrc: './assets/png/css3.png'
+                imgSrc: './imgs/css3.png'
             },
             {
                 cubie: 'ul',
                 face: 'u',
-                imgSrc: './assets/png/angular.png'
+                imgSrc: './imgs/angular.png'
             },
             {
                 cubie: 'ur',
                 face: 'u',
-                imgSrc: './assets/png/webpack.png'
+                imgSrc: './imgs/webpack.png'
             },
             {
                 cubie: 'uf',
                 face: 'u',
-                imgSrc: './assets/png/illustrator.png'
+                imgSrc: './imgs/illustrator.png'
             },
             {
                 cubie: 'u',
                 face: 'u',
-                imgSrc: './assets/png/sass.png'
+                imgSrc: './imgs/sass.png'
             }
 		],
 	},
@@ -95,7 +105,7 @@ const faces = {
 	},
 };
 
-const cubeSides = {
+export const cubeSides = {
     middles: ['u', 'd', 'f', 'b', 'r', 'l'],
     corners: ['ufr', 'ulf', 'urb', 'ubl', 'drf', 'dfl', 'dbr', 'dlb'],
     edges: ['uf', 'ul', 'ur', 'ub', 'df', 'dl', 'dr', 'db', 'fr', 'fl', 'br' ,'bl'],
