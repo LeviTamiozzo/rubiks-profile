@@ -26,22 +26,22 @@ import '../assets/png/webpack.png';
 import '../assets/png/illustrator.png';
 
 export const layers = {
-	u: { corners: [0, 1, 3, 2], edges: [0, 1, 3, 2] },
-	f: { corners: [1, 0, 4, 5], edges: [0, 8, 4, 9] },
-	r: { corners: [0, 2, 6, 4], edges: [6, 8, 2, 10] },
-	l: { corners: [3, 1, 5, 7], edges: [1, 9, 5, 11] },
-	b: { corners: [2, 3, 7, 6], edges: [3, 11, 7, 10] },
-	d: { corners: [4, 6, 7, 5], edges: [4, 6, 7, 5] },
+	u: { corners: [0, 1, 3, 2], edges: [0, 1, 3, 2], middles: ['u'] },
+	f: { corners: [1, 0, 4, 5], edges: [0, 8, 4, 9], middles: ['f']  },
+	r: { corners: [0, 2, 6, 4], edges: [6, 8, 2, 10], middles: ['r']  },
+	l: { corners: [3, 1, 5, 7], edges: [1, 9, 5, 11], middles: ['l']  },
+	b: { corners: [2, 3, 7, 6], edges: [3, 11, 7, 10], middles: ['b']  },
+	d: { corners: [4, 6, 7, 5], edges: [4, 6, 7, 5], middles: ['d']  },
 	e: { middles: ['f', 'r', 'b', 'l'], edges: [9, 8, 10, 11] },
 	m: { middles: ['d', 'b', 'u', 'f'], edges: [7, 3, 0, 4] },
-	s: { middles: ['r', 'd', 'l', 'u'], edges: [6, 5, 1, 2] }
+	s: { middles: ['r', 'd', 'l', 'u'], edges: [6, 5, 1, 2] },
 };
 
 export const content = {
 	f: {
 		title: 'ABOUT',
 	},
-	b: {
+	d: {
 		title: 'CONTACT',
 	},
 	r: {
@@ -57,47 +57,56 @@ export const content = {
 				cubie: 'ufr',
 				face: 'u',
 				imgSrc: './imgs/git.png',
-            },
-            {
-                cubie: 'ulf',
-                face: 'u',
-                imgSrc: './imgs/photoshop.png'
-            },
-            {
-                cubie: 'urb',
-                face: 'u',
-                imgSrc: './imgs/javascript.png'
-            },
-            {
-                cubie: 'ubl',
-                face: 'u',
-                imgSrc: './imgs/html5.png'
-            },
-            {
-                cubie: 'ub',
-                face: 'u',
-                imgSrc: './imgs/css3.png'
-            },
-            {
-                cubie: 'ul',
-                face: 'u',
-                imgSrc: './imgs/angular.png'
-            },
-            {
-                cubie: 'ur',
-                face: 'u',
-                imgSrc: './imgs/webpack.png'
-            },
-            {
-                cubie: 'uf',
-                face: 'u',
-                imgSrc: './imgs/illustrator.png'
-            },
-            {
-                cubie: 'u',
-                face: 'u',
-                imgSrc: './imgs/sass.png'
-            }
+				tooltip: 'Git',
+			},
+			{
+				cubie: 'ulf',
+				face: 'u',
+				imgSrc: './imgs/photoshop.png',
+				tooltip: 'Photoshop',
+			},
+			{
+				cubie: 'urb',
+				face: 'u',
+				imgSrc: './imgs/javascript.png',
+				tooltip: 'Javascript',
+			},
+			{
+				cubie: 'ubl',
+				face: 'u',
+				imgSrc: './imgs/html5.png',
+				tooltip: 'HTML5',
+			},
+			{
+				cubie: 'ub',
+				face: 'u',
+				imgSrc: './imgs/css3.png',
+				tooltip: 'CSS3',
+			},
+			{
+				cubie: 'ul',
+				face: 'u',
+				imgSrc: './imgs/angular.png',
+				tooltip: 'Angular',
+			},
+			{
+				cubie: 'ur',
+				face: 'u',
+				imgSrc: './imgs/webpack.png',
+				tooltip: 'Webpack',
+			},
+			{
+				cubie: 'uf',
+				face: 'u',
+				imgSrc: './imgs/illustrator.png',
+				tooltip: 'Illustrator',
+			},
+			{
+				cubie: 'u',
+				face: 'u',
+				imgSrc: './imgs/sass.png',
+				tooltip: 'SASS',
+			},
 		],
 	},
 	b: {
@@ -106,7 +115,19 @@ export const content = {
 };
 
 export const cubeSides = {
-    middles: ['u', 'd', 'f', 'b', 'r', 'l'],
-    corners: ['ufr', 'ulf', 'urb', 'ubl', 'drf', 'dfl', 'dbr', 'dlb'],
-    edges: ['uf', 'ul', 'ur', 'ub', 'df', 'dl', 'dr', 'db', 'fr', 'fl', 'br' ,'bl'],
-}
+	middles: {
+		ids: ['u', 'd', 'f', 'b', 'r', 'l'],
+		positionClass: 'cubie-middle-',
+		orientationClass: 'cubie-middle-orientation-',
+	},
+	corners: {
+		ids: ['ufr', 'ulf', 'urb', 'ubl', 'drf', 'dfl', 'dbr', 'dlb'],
+		positionClass: 'cubie-corner-position-',
+		orientationClass: 'cubie-corner-orientation-0',
+	},
+	edges: {
+		ids: ['uf', 'ul', 'ur', 'ub', 'df', 'dl', 'dr', 'db', 'fr', 'fl', 'br', 'bl'],
+		positionClass: 'cubie-edge-position-',
+		orientationClass: 'cubie-edge-orientation-0',
+	},
+};

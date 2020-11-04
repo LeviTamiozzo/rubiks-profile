@@ -1,4 +1,4 @@
-import { buildCube, doMove, updateCubie } from './scripts/cube';
+import { buildCube, doMove } from './scripts/cube';
 import * as uiElements from './scripts/uiElements';
 import './styles/app.scss';
 
@@ -9,11 +9,6 @@ uiElements.navButtons.forEach((button) =>
 		doMove(`${button.dataset.face}`);
 	})
 );
-
-const layerDivs = document.querySelectorAll('.cube-layer');
-for (var i = 0; i < layerDivs.length; ++i) {
-	layerDivs[i].addEventListener('transitionend', updateCubie, true);
-}
 
 if (navigator.userAgent.toLowerCase().indexOf('chrome') == -1) {
 	window.addEventListener(

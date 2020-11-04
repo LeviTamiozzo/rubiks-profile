@@ -3,109 +3,55 @@
 export function buildCube(cube) {
 	const template = document.getElementById('cube-template').content;
 
-	// Build Middles
-	cubeSides.middles.forEach((mid) => {
-		const clone = document.importNode(template, true);
-		const cubeLayer = clone.querySelector('.cube-layer');
-		const positionCubie = cubeLayer.querySelector('.cubie');
-		const orientationCubie = positionCubie.querySelector('.cubie');
-		const frontFace = orientationCubie.querySelector('.face-f');
+	// Build Cube
+	for (const side in cubeSides) {
+		const isMiddle = side == 'middles';
+		cubeSides[side].ids.forEach((id, index) => {
+			const clone = document.importNode(template, true);
+			const cubeLayer = clone.querySelector('.cube-layer');
+			const positionCubie = cubeLayer.querySelector('.cubie');
+			const orientationCubie = positionCubie.querySelector('.cubie');
 
-		// Set id
-		cubeLayer.setAttribute('id', `${mid}`);
+			// Set id
+			cubeLayer.setAttribute('id', `${id}`);
 
-		// Set position
-		positionCubie.classList.add(`cubie-middle-${mid}`);
+			// Set position
+			if (isMiddle) {
+				positionCubie.classList.add(`${cubeSides[side].positionClass}${id}`);
+			} else {
+				positionCubie.classList.add(`${cubeSides[side].positionClass}${index}`);
+			}
 
-		// Set orientation and rotation
-		orientationCubie.classList.add(`cubie-middle-orientation-${mid}`);
+			// Set orientation
+			if (isMiddle) {
+				orientationCubie.classList.add(`${cubeSides[side].orientationClass}${id}`);
+			} else {
+				orientationCubie.classList.add(`${cubeSides[side].orientationClass}`);
+			}
 
-		// Set sticker faces
-		frontFace.classList.add('cubie-sticker', `sticker-${mid}`);
+			// Set sticker faces
+			// frontFace.classList.add('cubie-sticker', `sticker-${mid}`);
+			if (isMiddle) {
+				const frontFace = orientationCubie.querySelector('.face-f');
+				frontFace.classList.add('cubie-sticker', `sticker-${id}`);
 
-		const innerSticker = document.createElement('div');
-		innerSticker.classList.add('inner-sticker');
-		frontFace.appendChild(innerSticker);
+				const innerSticker = document.createElement('div');
+				innerSticker.classList.add('inner-sticker');
+				frontFace.appendChild(innerSticker);
+			} else {
+				const faces = orientationCubie.querySelectorAll('.cubie-face');
+				[...id].forEach((face, faceIndex) => {
+					faces[faceIndex].classList.add('cubie-sticker', `sticker-${face}`);
 
-		cube.appendChild(cubeLayer);
-	});
+					const innerSticker = document.createElement('div');
+					innerSticker.classList.add('inner-sticker');
+					faces[faceIndex].appendChild(innerSticker);
+				});
+			}
 
-	// Build Corners
-	var cornerPosition = 0;
-	cubeSides.corners.forEach((corner) => {
-		const side1 = corner[0];
-		const side2 = corner[1];
-		const side3 = corner[2];
-
-		const clone = document.importNode(template, true);
-		const cubeLayer = clone.querySelector('.cube-layer');
-		const positionCubie = cubeLayer.querySelector('.cubie');
-		const orientationCubie = positionCubie.querySelector('.cubie');
-		const faces = orientationCubie.querySelectorAll('.cubie-face');
-
-		// Set id
-		cubeLayer.setAttribute('id', `${side1}${side2}${side3}`);
-
-		// Set position
-		positionCubie.classList.add(`cubie-corner-position-${cornerPosition}`);
-		cornerPosition++;
-
-		// Set orientation
-		orientationCubie.classList.add('cubie-corner-orientation-0');
-
-		// Set sticker faces
-		faces[0].classList.add('cubie-sticker', `sticker-${side1}`);
-		faces[1].classList.add('cubie-sticker', `sticker-${side2}`);
-		faces[2].classList.add('cubie-sticker', `sticker-${side3}`);
-
-		const innerSticker = document.createElement('div');
-		innerSticker.classList.add('inner-sticker');
-		faces[0].appendChild(innerSticker);
-
-		const innerSticker2 = document.importNode(innerSticker, true);
-		faces[1].appendChild(innerSticker2);
-
-		const innerSticker3 = document.importNode(innerSticker, true);
-		faces[2].appendChild(innerSticker3);
-
-		cube.appendChild(cubeLayer);
-	});
-
-	// Build Edges
-	var edgePosition = 0;
-	cubeSides.edges.forEach((edge) => {
-		const side1 = edge[0];
-		const side2 = edge[1];
-
-		const clone = document.importNode(template, true);
-		const cubeLayer = clone.querySelector('.cube-layer');
-		const positionCubie = cubeLayer.querySelector('.cubie');
-		const orientationCubie = positionCubie.querySelector('.cubie');
-		const faces = orientationCubie.querySelectorAll('.cubie-face');
-
-		// Set id
-		cubeLayer.setAttribute('id', `${side1}${side2}`);
-
-		// Set position
-		positionCubie.classList.add(`cubie-edge-position-${edgePosition}`);
-		edgePosition++;
-
-		// Set orientation
-		orientationCubie.classList.add('cubie-edge-orientation-0');
-
-		// Set sticker faces
-		faces[0].classList.add('cubie-sticker', `sticker-${side1}`);
-		faces[1].classList.add('cubie-sticker', `sticker-${side2}`);
-
-		const innerSticker = document.createElement('div');
-		innerSticker.classList.add('inner-sticker');
-		faces[0].appendChild(innerSticker);
-
-		const innerSticker2 = document.importNode(innerSticker, true);
-		faces[1].appendChild(innerSticker2);
-
-		cube.appendChild(cubeLayer);
-	});
+			cube.appendChild(cubeLayer);
+		});
+	}
 
 	addCubeContent(cube);
 }
@@ -124,57 +70,50 @@ function addCubeContent(cube) {
 				img.src = cubie.imgSrc;
 				innerSticker.appendChild(img);
 			}
+
+			if (cubie.tooltip) {
+				innerSticker.classList.add('has-tooltip');
+				innerSticker.setAttribute('tooltip', cubie.tooltip);
+			}
 		});
 	}
 }
 
-/** Adds classes to cubies to start animation. */
+/* Adds classes to cubies to start animation. */
 export function doMove(turn) {
 	const side = turn[0];
 	const layer = layers[turn[0]];
 	var cubies = [];
 
-	// Push middles
-	if (!layer.middles) {
-		const m = document.querySelector(`.cubie-middle-${side}`);
-		cubies.push(m.parentNode);
+	// Push Cubies
+	for (const side in layer) {
+		layer[side].forEach((s) => {
+			const m = document.querySelector(`.${cubeSides[side].positionClass}${s}`);
+			cubies.push(m.parentNode);
+		});
 	}
-
-	layer.middles?.forEach((mid) => {
-		const e = document.querySelector(`.cubie-middle-${mid}`);
-		cubies.push(e.parentNode);
-	});
-
-	// Push corners
-	layer.corners?.forEach((corner) => {
-		const c = document.querySelector(`.cubie-corner-position-${corner}`);
-		cubies.push(c.parentNode);
-	});
-
-	// Push edges
-	layer.edges.forEach((edge) => {
-		const e = document.querySelector(`.cubie-edge-position-${edge}`);
-		cubies.push(e.parentNode);
-	});
 
 	// Add classes
 	cubies.forEach((cubie) => {
 		cubie.classList.add('turn');
 		cubie.classList.add(`turn-${turn}`);
+		setTimeout(() => {
+			updateCubie(cubie);
+		}, 600);
 	});
 }
 
-/**	Updates classes of cubie. This should be called on completion of
+/*	Updates classes of cubie. This should be called on completion of
 	animation for every cubie that was involved in animation. */
-export function updateCubie() {
-	var match = this.className.match(/turn\-(..)/);
-	this.classList.remove('turn');
-	this.classList.remove(match[0]);
+export function updateCubie(cubie) {
+	var match = cubie.className.match(/turn\-(..)/);
+	cubie.classList.remove('turn');
+	cubie.classList.remove(match[0]);
 
 	const step = +match[1][1];
 	const side = match[1][0];
 	const layer = layers[side];
-	var div = this.children[0];
+	var div = cubie.children[0];
 
 	var re = /(cubie-corner-position-)(\d+)/;
 	if ((match = div.className.match(re))) {
@@ -203,7 +142,7 @@ export function updateCubie() {
 	}
 
 	if (side == 'm' || side == 'e' || side == 's') {
-		div = this.children[0];
+		div = cubie.children[0];
 		re = /(cubie-middle-)([a-z]+)/;
 		if ((match = div.className.match(re))) {
 			const idx = layer.middles.indexOf(match[2]);
@@ -218,7 +157,7 @@ export function updateCubie() {
 	}
 }
 
-/**	Generates and executes random move */
+/*	Generates and executes random move */
 var nextMove = (function () {
 	var prevSide = '';
 	var sides = ['u', 'f', 'r', 'l', 'b', 'd', 'm', 'e', 's'];
