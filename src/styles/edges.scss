@@ -1,0 +1,107 @@
+.scene {
+	.cube {
+		.cubie {
+			&.cubie-edge-position-0 {
+				transform: translate3d(0px, -100px, 100px);
+
+				.cubie-edge-orientation-0 .face-f .inner-sticker.has-tooltip:hover,
+				.cubie-edge-orientation-1 .face-u .inner-sticker.has-tooltip:hover {
+					@include inner-sticker-hover;
+				}
+
+				.cubie-edge-orientation-1 {
+					.face-u .inner-sticker img,
+					.face-u .inner-sticker:hover::before {
+						transform: rotateZ(180deg);
+					}
+				}
+			}
+			&.cubie-edge-position-1 {
+				transform: translate3d(-100px, -100px, 0px) rotateY(-90deg);
+
+				.face-u .inner-sticker img {
+					transform: rotateZ(-90deg);
+				}
+
+				.cubie-edge-orientation-1 {
+					.face-u .inner-sticker img {
+						transform: rotateZ(180deg);
+					}
+				}
+			}
+			&.cubie-edge-position-2 {
+				transform: translate3d(100px, -100px, 0px) rotateY(90deg);
+
+				.face-u .inner-sticker img {
+					transform: rotateZ(90deg);
+				}
+			}
+			&.cubie-edge-position-3 {
+				transform: translate3d(0px, -100px, -100px) rotateY(180deg);
+
+				.face-u .inner-sticker img {
+					transform: rotateZ(-180deg);
+				}
+			}
+			&.cubie-edge-position-4 {
+				transform: translate3d(0px, 100px, 100px) rotateX(180deg) rotateY(180deg);
+
+				.cubie-edge-orientation-0 .face-f .inner-sticker.has-tooltip:hover,
+				.cubie-edge-orientation-1 .face-u .inner-sticker.has-tooltip:hover {
+					@include inner-sticker-hover;
+				}
+			}
+			&.cubie-edge-position-5 {
+				transform: translate3d(-100px, 100px, 0px) rotateX(180deg) rotateY(-90deg);
+			}
+			&.cubie-edge-position-6 {
+				transform: translate3d(100px, 100px, 0px) rotateX(180deg) rotateY(90deg);
+			}
+			&.cubie-edge-position-7 {
+				transform: translate3d(0px, 100px, -100px) rotateX(180deg);
+			}
+			&.cubie-edge-position-8 {
+				transform: translate3d(100px, 0px, 100px) rotateX(-90deg) rotateY(90deg);
+
+				.cubie-edge-orientation-0 .face-u .inner-sticker.has-tooltip:hover,
+				.cubie-edge-orientation-1 .face-f .inner-sticker.has-tooltip:hover {
+					@include inner-sticker-hover;
+				}
+
+				.face-u .inner-sticker img,
+				.face-u .inner-sticker:hover::before {
+					transform: rotateZ(90deg);
+				}
+			}
+			&.cubie-edge-position-9 {
+				transform: translate3d(-100px, 0px, 100px) rotateX(-90deg) rotateY(-90deg);
+
+				.cubie-edge-orientation-0 .face-u .inner-sticker.has-tooltip:hover,
+				.cubie-edge-orientation-1 .face-f .inner-sticker.has-tooltip:hover {
+					@include inner-sticker-hover;
+				}
+
+				.face-u .inner-sticker img,
+				.face-u .inner-sticker:hover::before  {
+					transform: rotateZ(-90deg);
+				}
+			}
+			&.cubie-edge-position-10 {
+				transform: translate3d(100px, 0px, -100px) rotateX(90deg) rotateY(90deg);
+			}
+			&.cubie-edge-position-11 {
+				transform: translate3d(-100px, 0px, -100px) rotateX(90deg) rotateY(-90deg);
+
+				.cubie-edge-orientation-1 {
+					.face-u .inner-sticker img {
+						transform: rotateZ(-90deg);
+					}
+				}
+            }
+            
+			&.cubie-edge-orientation-1 {
+				transform: rotateX(-90deg) rotateY(180deg);
+			}
+		}
+	}
+}

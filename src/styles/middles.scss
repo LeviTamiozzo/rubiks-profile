@@ -1,0 +1,61 @@
+.scene {
+	.cube {
+		.cubie {
+			&.cubie-middle-r {
+				transform: translate3d(100px, 0px, 0px);
+
+				.cubie-middle-orientation-r {
+					transform: rotateY(90deg);
+				}
+			}
+			&.cubie-middle-l {
+				transform: translate3d(-100px, 0px, 0px);
+
+				.cubie-middle-orientation-l {
+					transform: rotateY(-90deg);
+				}
+			}
+			&.cubie-middle-f {
+				transform: translate3d(0px, 0px, 100px);
+
+				.cubie-middle-orientation-f .inner-sticker.has-tooltip:hover {
+					@include inner-sticker-hover;
+				}
+			}
+			&.cubie-middle-b {
+				transform: translate3d(0px, 0px, -100px);
+
+				.cubie-middle-orientation-b {
+					transform: rotateY(180deg);
+				}
+			}
+			&.cubie-middle-u {
+				transform: translate3d(0px, -100px, 0px);
+
+				.cubie-middle-orientation-u {
+					transform: rotateX(90deg);
+				}
+			}
+			&.cubie-middle-d {
+				transform: translate3d(0px, 100px, 0px);
+
+				.cubie-middle-orientation-d {
+					transform: rotateX(-90deg);
+				}
+			}
+		}
+
+		.cubie-middle-f .cubie-sticker::before {
+			position: absolute;
+			transform-style: preserve-3d;
+			font-size: 35px;
+			display: block;
+			transform: translate3d(0, 0, 100px);
+			text-shadow: 1px 3px 8px rgba(0, 0, 0, 0.7);
+			color: #fff;
+			font-weight: 600;
+			content: attr(title);
+			pointer-events: none;
+		}
+	}
+}

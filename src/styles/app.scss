@@ -2,6 +2,9 @@
 @import './cube.scss';
 
 * {
+	margin: 0;
+	padding: 0;
+	box-sizing: content-box;
 	font-family: roboto, sans-serif;
 }
 

@@ -1,0 +1,20 @@
+@mixin hidden {
+	visibility: hidden;
+	opacity: 0;
+}
+
+@mixin inner-sticker-hover {
+	transform: scale(1.07);
+
+	&.has-tooltip::before {
+		content: attr(tooltip);
+		position: absolute;
+		line-height: 35px;
+		padding: 0 5px;
+		background-color: black;
+		opacity: 0.65;
+		border-radius: 5px;
+		color: white;
+		z-index: 2;
+	}
+}
