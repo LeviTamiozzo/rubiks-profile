@@ -1,20 +1,3 @@
-/*
-corners  _.-'-._                 edges    _.-'-._
-     _.-'-._3_.-'-._                  _.-'-._ _.-'-._
- _.-'-._ _.-'-._ _.-'-._          _.-'-._1_.-'-._3_.-'-._
-|-._ _.-'-._U_.-'-._ _.-|        |-._ _.-'-._U_.-'-._ _.-|
-| 1 |-._ _.-'-._ _.-| 2 |        |   |-._ _.-'-._ _.-|   |
-|-._|   |-._ _.-|   |_.-|        |-._| 0 |-._ _.-| 2 |_.-|
-|   |-._|   0   |_.-|   |        | 9 |-._|   |   |_.-| 10|
-|-._| F |-._|_.-| R |_.-|        |-._| F |-._|_.-| R |_.-|
-| 5 |-._|   |   |_.-| 6 |   5--> |   |-._|  8|   |_.-|   | <--7
-'-._|   |-._|_.-|   |_.-'        '-._| 4 |-._|_.-| 6 |_.-'
-    '-._|   |   |_.-'                '-._|   |   |_.-'
-        '-._4_.-'                        '-._|_.-'
-
-U       F        R       L       B       D
-up    front    right    left    back    down
-*/
 import '../assets/png/git.png';
 import '../assets/png/photoshop.png';
 import '../assets/png/javascript.png';
@@ -24,93 +7,342 @@ import '../assets/png/angular.png';
 import '../assets/png/sass.png';
 import '../assets/png/webpack.png';
 import '../assets/png/illustrator.png';
+import '../assets/png/github.png';
+import '../assets/png/mail.png';
+import '../assets/png/linkedin.png';
+import '../assets/png/typescript.png';
+import '../assets/png/responsive.png';
+import '../assets/png/bootstrap.png';
+import '../assets/png/best-employee.png';
+import '../assets/png/teamwork.png';
+import '../assets/png/dad.png';
+import '../assets/png/react.png';
+import '../assets/png/vue.png';
+import '../assets/png/node.png';
 
 export const layers = {
-	u: { corners: [0, 1, 3, 2], edges: [0, 1, 3, 2], middles: ['u'] },
-	f: { corners: [1, 0, 4, 5], edges: [0, 8, 4, 9], middles: ['f']  },
-	r: { corners: [0, 2, 6, 4], edges: [6, 8, 2, 10], middles: ['r']  },
-	l: { corners: [3, 1, 5, 7], edges: [1, 9, 5, 11], middles: ['l']  },
-	b: { corners: [2, 3, 7, 6], edges: [3, 11, 7, 10], middles: ['b']  },
-	d: { corners: [4, 6, 7, 5], edges: [4, 6, 7, 5], middles: ['d']  },
-	e: { middles: ['f', 'r', 'b', 'l'], edges: [9, 8, 10, 11] },
-	m: { middles: ['d', 'b', 'u', 'f'], edges: [7, 3, 0, 4] },
-	s: { middles: ['r', 'd', 'l', 'u'], edges: [6, 5, 1, 2] },
+	u: { corners: ['ufr', 'ulf', 'ubl', 'urb'], edges: ['uf', 'ul', 'ub', 'ur'], middles: ['u'] },
+	f: { corners: ['ulf', 'ufr', 'drf', 'dfl'], edges: ['uf', 'fr', 'df', 'fl'], middles: ['f'] },
+	r: { corners: ['ufr', 'urb', 'dbr', 'drf'], edges: ['dr', 'fr', 'ur', 'br'], middles: ['r'] },
+	l: { corners: ['ubl', 'ulf', 'dfl', 'dlb'], edges: ['ul', 'fl', 'dl', 'bl'], middles: ['l'] },
+	b: { corners: ['urb', 'ubl', 'dlb', 'dbr'], edges: ['ub', 'bl', 'db', 'br'], middles: ['b'] },
+	d: { corners: ['drf', 'dbr', 'dlb', 'dfl'], edges: ['df', 'dr', 'db', 'dl'], middles: ['d'] },
+	e: { middles: ['f', 'r', 'b', 'l'], edges: ['fl', 'fr', 'br', 'bl'] },
+	m: { middles: ['d', 'b', 'u', 'f'], edges: ['db', 'ub', 'uf', 'df'] },
+	s: { middles: ['r', 'd', 'l', 'u'], edges: ['dr', 'dl', 'ul', 'ur'] },
 };
 
 export const content = {
 	f: {
-		title: 'ABOUT',
+		cubies: [
+			{
+				cubie: 'ulf',
+				text: {
+					tag: 'h1',
+					value: 'Hi!',
+				},
+			},
+			{
+				cubie: 'uf',
+				text: {
+					tag: 'h3',
+					value: 'I am',
+				},
+			},
+			{
+				cubie: 'ufr',
+				text: {
+					tag: 'h1',
+					value: 'Levi.',
+				},				
+			},
+			{
+				cubie: 'fl',
+				text: {
+					tag: 'h3',
+					value: 'You can',
+				},				
+			},
+			{
+				cubie: 'f',
+				text: {
+					tag: 'h4',
+					value: 'checkout my',
+				},				
+			},
+			{
+				cubie: 'fr',
+				text: {
+					tag: 'h3',
+					value: 'profile by',
+				},
+			},
+			{
+				cubie: 'dfl',
+				text: {
+					tag: 'h4',
+					value: 'playing around',
+				},				
+			},
+			{
+				cubie: 'df',
+				text: {
+					tag: 'h3',
+					value: 'with the',
+				},					
+			},
+			{
+				cubie: 'drf',
+				text: {
+					tag: 'h1',
+					value: 'cube',
+				},		
+			},
+		],
 	},
 	d: {
-		title: 'CONTACT',
+		title: 'ME',
+		cubies: [
+			{
+				cubie: 'dfl',
+				imgSrc: './imgs/best-employee.png',
+				tooltip: 'Gamba Esfuerzo',
+			},
+			{
+				cubie: 'df',
+				imgSrc: './imgs/teamwork.png',
+				tooltip: 'Rombo Teamate',
+			},
+			{
+				cubie: 'drf',
+				imgSrc: './imgs/dad.png',
+				tooltip: 'Best Father',
+			},
+			{
+				cubie: 'dl',
+				imgSrc: './imgs/react.png',
+				tooltip: 'React',
+			},
+			{
+				cubie: 'd',
+				imgSrc: './imgs/vue.png',
+				tooltip: 'Vue',
+			},
+			{
+				cubie: 'dr',
+				imgSrc: './imgs/node.png',
+				tooltip: 'Node',
+			},
+			{
+				cubie: 'dlb',
+				imgSrc: './imgs/git.png',
+				tooltip: 'Puzzles',
+			},
+			{
+				cubie: 'db',
+				imgSrc: './imgs/illustrator.png',
+				tooltip: 'Music',
+			},
+			{
+				cubie: 'dbr',
+				imgSrc: './imgs/sass.png',
+				tooltip: 'Travel',
+			},
+		],
 	},
 	r: {
-		title: 'PROJECTS',
-	},
-	l: {
-		title: 'EXPERIENCE',
-	},
-	u: {
-		title: 'SKILLS',
+		title: 'SECONDARY SKILLS',
 		cubies: [
 			{
 				cubie: 'ufr',
-				face: 'u',
 				imgSrc: './imgs/git.png',
-				tooltip: 'Git',
+				tooltip: 'NetCore',
 			},
 			{
-				cubie: 'ulf',
-				face: 'u',
+				cubie: 'ur',
+				imgSrc: './imgs/photoshop.png',
+				tooltip: 'C#',
+			},
+			{
+				cubie: 'urb',
+				imgSrc: './imgs/javascript.png',
+				tooltip: 'SQL',
+			},
+			{
+				cubie: 'fr',
 				imgSrc: './imgs/photoshop.png',
 				tooltip: 'Photoshop',
 			},
 			{
-				cubie: 'urb',
-				face: 'u',
-				imgSrc: './imgs/javascript.png',
-				tooltip: 'Javascript',
+				cubie: 'r',
+				imgSrc: './imgs/illustrator.png',
+				tooltip: 'Illustrator',
 			},
 			{
+				cubie: 'br',
+				imgSrc: './imgs/angular.png',
+				tooltip: 'Excel',
+			},
+			{
+				cubie: 'drf',
+				imgSrc: './imgs/git.png',
+				tooltip: 'Git',
+			},
+			{
+				cubie: 'dr',
+				imgSrc: './imgs/illustrator.png',
+				tooltip: 'TFS',
+			},
+			{
+				cubie: 'dbr',
+				imgSrc: './imgs/sass.png',
+				tooltip: 'Jira',
+			},
+		],
+	},
+	l: {
+		title: 'WORK AND EDUCATION',
+		cubies: [
+			{
 				cubie: 'ubl',
-				face: 'u',
+				imgSrc: './imgs/git.png',
+				tooltip: 'Hexacta',
+			},
+			{
+				cubie: 'ul',
+				imgSrc: './imgs/photoshop.png',
+				tooltip: 'Gamba FM',
+			},
+			{
+				cubie: 'ulf',
+				imgSrc: './imgs/javascript.png',
+				tooltip: 'Rombo Velox SA',
+			},
+			{
+				cubie: 'bl',
+				imgSrc: './imgs/photoshop.png',
+				tooltip: 'Freelance',
+			},
+			{
+				cubie: 'l',
+				imgSrc: './imgs/illustrator.png',
+				tooltip: 'Duit',
+			},
+			{
+				cubie: 'fl',
+				imgSrc: './imgs/angular.png',
+				tooltip: 'Profile',
+			},
+			{
+				cubie: 'dlb',
+				imgSrc: './imgs/git.png',
+				tooltip: 'Programming',
+			},
+			{
+				cubie: 'dl',
+				imgSrc: './imgs/illustrator.png',
+				tooltip: 'Programming',
+			},
+			{
+				cubie: 'dfl',
+				imgSrc: './imgs/sass.png',
+				tooltip: 'Advertising',
+			},
+		],
+	},
+	u: {
+		title: 'PRIMARY SKILLS',
+		cubies: [
+			{
+				cubie: 'ubl',
 				imgSrc: './imgs/html5.png',
 				tooltip: 'HTML5',
 			},
 			{
 				cubie: 'ub',
-				face: 'u',
 				imgSrc: './imgs/css3.png',
 				tooltip: 'CSS3',
 			},
 			{
+				cubie: 'urb',
+				imgSrc: './imgs/javascript.png',
+				tooltip: 'Javascript',
+			},
+			{
 				cubie: 'ul',
-				face: 'u',
 				imgSrc: './imgs/angular.png',
 				tooltip: 'Angular',
 			},
 			{
+				cubie: 'u',
+				imgSrc: './imgs/typescript.png',
+				tooltip: 'Typescript',
+			},
+			{
 				cubie: 'ur',
-				face: 'u',
+				imgSrc: './imgs/sass.png',
+				tooltip: 'SASS',
+			},
+			{
+				cubie: 'ulf',
 				imgSrc: './imgs/webpack.png',
 				tooltip: 'Webpack',
 			},
 			{
 				cubie: 'uf',
-				face: 'u',
-				imgSrc: './imgs/illustrator.png',
-				tooltip: 'Illustrator',
+				imgSrc: './imgs/bootstrap.png',
+				tooltip: 'Bootstrap',
 			},
 			{
-				cubie: 'u',
-				face: 'u',
-				imgSrc: './imgs/sass.png',
-				tooltip: 'SASS',
+				cubie: 'ufr',
+				imgSrc: './imgs/responsive.png',
+				tooltip: 'Responsive Design',
 			},
 		],
 	},
 	b: {
-		title: 'AWARDS',
+		title: 'ABOUT',
+		cubies: [
+			{
+				cubie: 'dbr',
+				tooltip: 'Languages',
+			},
+			{
+				cubie: 'db',
+				tooltip: 'Mission',
+			},
+			{
+				cubie: 'dlb',
+				tooltip: 'Home',
+			},
+			{
+				cubie: 'bl',
+				tooltip: 'Good Humor',
+			},
+			{
+				cubie: 'b',
+				tooltip: 'Teamwork',
+			},
+			{
+				cubie: 'br',
+				tooltip: 'Fast Learner',
+			},
+			{
+				cubie: 'ubl',
+				imgSrc: './imgs/mail.png',
+				tooltip: 'e-mail',
+			},
+			{
+				cubie: 'ub',
+				imgSrc: './imgs/linkedin.png',
+				tooltip: 'Linkedin',
+			},
+			{
+				cubie: 'urb',
+				imgSrc: './imgs/github.png',
+				tooltip: 'Github',
+			},
+		],
 	},
 };
 

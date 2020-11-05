@@ -6,7 +6,26 @@ buildCube(uiElements.cube);
 
 uiElements.navButtons.forEach((button) =>
 	button.addEventListener('click', () => {
-		doMove(`${button.dataset.face}`);
+		if (button.dataset.face == 'up') {
+			doMove('l1');
+			doMove('m1');
+			doMove('r3');
+		}
+		if (button.dataset.face == 'down') {
+			doMove('l3');
+			doMove('m3');
+			doMove('r1');
+		}
+		if (button.dataset.face == 'left') {
+			doMove('u3');
+			doMove('e1');
+			doMove('d1');
+		}
+		if (button.dataset.face == 'right') {
+			doMove('u1');
+			doMove('e3');
+			doMove('d3');
+		}
 	})
 );
 

@@ -3,98 +3,129 @@
 .scene {
 	.cube {
 		.cubie {
-			&.cubie-corner-position-0 {
+			&.cubie-corner-position-ufr {
 				transform: translate3d(100px, -100px, 100px);
 
-				.cubie-corner-orientation-0 .face-f .inner-sticker.has-tooltip:hover,
-				.cubie-corner-orientation-1 .face-r .inner-sticker.has-tooltip:hover,
-				.cubie-corner-orientation-2 .face-u .inner-sticker.has-tooltip:hover {
-					@include inner-sticker-hover;
+				.cubie-corner-orientation-0 .face-f .inner-sticker,
+				.cubie-corner-orientation-1 .face-r .inner-sticker,
+				.cubie-corner-orientation-2 .face-u .inner-sticker {
+					@include inner-sticker-front;
 				}
 
 				.cubie-corner-orientation-2 {
-					.face-u .inner-sticker img,
+					.face-u .inner-sticker > *,
 					.face-u .inner-sticker:hover::before {
 						transform: rotateZ(90deg);
 					}
 				}
 			}
-			&.cubie-corner-position-1 {
+			&.cubie-corner-position-ulf {
 				transform: translate3d(-100px, -100px, 100px) rotateY(-90deg);
 
-				.cubie-corner-orientation-0 .face-r .inner-sticker.has-tooltip:hover,
-				.cubie-corner-orientation-1 .face-u .inner-sticker.has-tooltip:hover,
-				.cubie-corner-orientation-2 .face-f .inner-sticker.has-tooltip:hover {
-					@include inner-sticker-hover;
+				.cubie-corner-orientation-0 .face-r .inner-sticker,
+				.cubie-corner-orientation-1 .face-u .inner-sticker,
+				.cubie-corner-orientation-2 .face-f .inner-sticker {
+					@include inner-sticker-front;
 				}
 
-				.face-u .inner-sticker img {
+				.face-u .inner-sticker > * {
 					transform: rotateZ(-90deg);
 				}
 
 				.cubie-corner-orientation-1 {
-					.face-u .inner-sticker {
-						& img,
-						&:hover::before {
-							transform: rotateZ(-180deg);
-						}
+					.face-u .inner-sticker > *,
+					.face-u .inner-sticker:hover::before {
+						transform: rotateZ(-180deg);
+					}
+
+					.face-f .inner-sticker > * {
+						transform: rotateZ(-180deg);
 					}
 				}
 
 				.cubie-corner-orientation-2 {
-					.face-u .inner-sticker img {
+					.face-u .inner-sticker > * {
+						transform: rotateZ(90deg);
+					}
+
+					.face-f .inner-sticker > *,
+					.face-f .inner-sticker:hover::before {
 						transform: rotateZ(90deg);
 					}
 				}
 			}
-			&.cubie-corner-position-2 {
+			&.cubie-corner-position-urb {
 				transform: translate3d(100px, -100px, -100px) rotateY(90deg);
 
-				.face-u .inner-sticker img {
+				.face-u .inner-sticker > * {
 					transform: rotateZ(90deg);
 				}
 			}
-			&.cubie-corner-position-3 {
+			&.cubie-corner-position-ubl {
 				transform: translate3d(-100px, -100px, -100px) rotateY(180deg);
 
-				.face-u .inner-sticker img {
+				.face-u .inner-sticker > * {
 					transform: rotateZ(-180deg);
 				}
 			}
-			&.cubie-corner-position-4 {
+			&.cubie-corner-position-drf {
 				transform: translate3d(100px, 100px, 100px) rotateX(180deg) rotateY(90deg);
 
-				.cubie-corner-orientation-0 .face-r .inner-sticker.has-tooltip:hover,
-				.cubie-corner-orientation-1 .face-u .inner-sticker.has-tooltip:hover,
-				.cubie-corner-orientation-2 .face-f .inner-sticker.has-tooltip:hover {
-					@include inner-sticker-hover;
+				.cubie-corner-orientation-0 .face-r .inner-sticker,
+				.cubie-corner-orientation-1 .face-u .inner-sticker,
+				.cubie-corner-orientation-2 .face-f .inner-sticker {
+					@include inner-sticker-front;
+				}
+
+				.cubie-corner-orientation-0 {
+					.face-r .inner-sticker > *,
+					.face-r .inner-sticker:hover::before {
+						transform: rotateZ(180deg);
+					}
 				}
 			}
-			&.cubie-corner-position-5 {
+			&.cubie-corner-position-dfl {
 				transform: translate3d(-100px, 100px, 100px) rotateX(180deg) rotateY(180deg);
 
-				.cubie-corner-orientation-0 .face-f .inner-sticker.has-tooltip:hover,
-				.cubie-corner-orientation-1 .face-r .inner-sticker.has-tooltip:hover,
-				.cubie-corner-orientation-2 .face-u .inner-sticker.has-tooltip:hover {
-					@include inner-sticker-hover;
+				.cubie-corner-orientation-0 .face-f .inner-sticker,
+				.cubie-corner-orientation-1 .face-r .inner-sticker,
+				.cubie-corner-orientation-2 .face-u .inner-sticker {
+					@include inner-sticker-front;
+				}
+
+				.cubie-corner-orientation-0 {
+					.face-f .inner-sticker > *,
+					.face-f .inner-sticker:hover::before {
+						transform: rotateZ(180deg);
+					}
+
+					.face-r .inner-sticker > * {
+						transform: rotateZ(180deg);
+					}
 				}
 
 				.cubie-corner-orientation-2 {
-					.face-u .inner-sticker img,
+					.face-u .inner-sticker > *,
 					.face-u .inner-sticker:hover::before {
 						transform: rotateZ(-90deg);
 					}
 				}
 			}
-			&.cubie-corner-position-6 {
+			&.cubie-corner-position-dbr {
 				transform: translate3d(100px, 100px, -100px) rotateX(180deg);
 			}
-			&.cubie-corner-position-7 {
+			&.cubie-corner-position-dlb {
 				transform: translate3d(-100px, 100px, -100px) rotateX(180deg) rotateY(-90deg);
 
 				.cubie-corner-orientation-2 {
-					.face-u .inner-sticker img {
+					.face-u .inner-sticker > * {
 						transform: rotateZ(-90deg);
+					}
+				}
+
+				.cubie-corner-orientation-0 {
+					.face-f .inner-sticker > * {
+						transform: rotateZ(180deg);
 					}
 				}
 			}

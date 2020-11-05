@@ -6,7 +6,7 @@ export function buildCube(cube) {
 	// Build Cube
 	for (const side in cubeSides) {
 		const isMiddle = side == 'middles';
-		cubeSides[side].ids.forEach((id, index) => {
+		cubeSides[side].ids.forEach((id) => {
 			const clone = document.importNode(template, true);
 			const cubeLayer = clone.querySelector('.cube-layer');
 			const positionCubie = cubeLayer.querySelector('.cubie');
@@ -16,21 +16,12 @@ export function buildCube(cube) {
 			cubeLayer.setAttribute('id', `${id}`);
 
 			// Set position
-			if (isMiddle) {
-				positionCubie.classList.add(`${cubeSides[side].positionClass}${id}`);
-			} else {
-				positionCubie.classList.add(`${cubeSides[side].positionClass}${index}`);
-			}
+			positionCubie.classList.add(`${cubeSides[side].positionClass}${id}`);
 
 			// Set orientation
-			if (isMiddle) {
-				orientationCubie.classList.add(`${cubeSides[side].orientationClass}${id}`);
-			} else {
-				orientationCubie.classList.add(`${cubeSides[side].orientationClass}`);
-			}
+			orientationCubie.classList.add(`${cubeSides[side].orientationClass}${isMiddle ? id : ''}`);
 
 			// Set sticker faces
-			// frontFace.classList.add('cubie-sticker', `sticker-${mid}`);
 			if (isMiddle) {
 				const frontFace = orientationCubie.querySelector('.face-f');
 				frontFace.classList.add('cubie-sticker', `sticker-${id}`);
@@ -59,11 +50,15 @@ export function buildCube(cube) {
 function addCubeContent(cube) {
 	for (const face in content) {
 		const faceObject = content[face];
-		const middleCubieSticker = cube.querySelector(`#${face} .cubie-sticker`);
-		middleCubieSticker.setAttribute('title', faceObject.title);
+
+		if (faceObject.title) {
+			const middleCubieSticker = cube.querySelector(`#${face} .cubie-sticker`);
+			middleCubieSticker.classList.add('has-title');
+			middleCubieSticker.setAttribute('title', faceObject.title);
+		}
 
 		faceObject.cubies?.forEach((cubie) => {
-			const innerSticker = cube.querySelector(`#${cubie.cubie} .sticker-${cubie.face} .inner-sticker`);
+			const innerSticker = cube.querySelector(`#${cubie.cubie} .sticker-${face} .inner-sticker`);
 
 			if (cubie.imgSrc) {
 				var img = document.createElement('img');
@@ -74,6 +69,13 @@ function addCubeContent(cube) {
 			if (cubie.tooltip) {
 				innerSticker.classList.add('has-tooltip');
 				innerSticker.setAttribute('tooltip', cubie.tooltip);
+			}
+
+			if (cubie.text) {
+				var element = document.createElement(cubie.text.tag);
+				element.innerHTML = cubie.text.value;
+				innerSticker.classList.add('has-text');
+				innerSticker.appendChild(element);
 			}
 		});
 	}
@@ -115,9 +117,9 @@ export function updateCubie(cubie) {
 	const layer = layers[side];
 	var div = cubie.children[0];
 
-	var re = /(cubie-corner-position-)(\d+)/;
+	var re = /(cubie-corner-position-)([a-z]+)/;
 	if ((match = div.className.match(re))) {
-		const idx = layer.corners.indexOf(+match[2]);
+		const idx = layer.corners.indexOf(match[2]);
 		var newVal = layer.corners[(idx + step) & 3];
 		div.className = div.className.replace(re, '$1' + newVal);
 
@@ -128,9 +130,9 @@ export function updateCubie(cubie) {
 		div.className = div.className.replace(re, '$1' + newVal);
 	}
 
-	re = /(cubie-edge-position-)(\d+)/;
+	re = /(cubie-edge-position-)([a-z]+)/;
 	if ((match = div.className.match(re))) {
-		const idx = layer.edges.indexOf(+match[2]);
+		const idx = layer.edges.indexOf(match[2]);
 		var newVal = layer.edges[(idx + step) & 3];
 		div.className = div.className.replace(re, '$1' + newVal);
 

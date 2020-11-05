@@ -41,10 +41,10 @@
 				}
 
 				&.sticker-u .inner-sticker {
-					background-color: $yellow;
+					background-color: $red;
 				}
 				&.sticker-f .inner-sticker {
-					background-color: $red;
+					background-color: $white;
 				}
 				&.sticker-r .inner-sticker {
 					background-color: $green;
@@ -53,10 +53,10 @@
 					background-color: $blue;
 				}
 				&.sticker-b .inner-sticker {
-					background-color: $orange;
+					background-color: $yellow;
 				}
 				&.sticker-d .inner-sticker {
-					background-color: $white;
+					background-color: $orange;
 				}
 
 				&.sticker-u {
@@ -88,10 +88,17 @@
 					justify-content: center;
 					transition: all 0.2s;
 
-					img {
+					& > * {
 						max-width: 70%;
 						max-height: 70%;
 						transition: opacity 0.6s;
+						filter: grayscale(60%) blur(5px);
+					}
+
+					&.has-text * {
+						padding: 5px;
+						text-align: center;
+						user-select: none;
 					}
 				}
 			}

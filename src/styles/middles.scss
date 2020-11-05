@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 .scene {
 	.cube {
 		.cubie {
@@ -18,8 +20,8 @@
 			&.cubie-middle-f {
 				transform: translate3d(0px, 0px, 100px);
 
-				.cubie-middle-orientation-f .inner-sticker.has-tooltip:hover {
-					@include inner-sticker-hover;
+				.cubie-middle-orientation-f .inner-sticker {
+					@include inner-sticker-front;
 				}
 			}
 			&.cubie-middle-b {
@@ -45,17 +47,21 @@
 			}
 		}
 
-		.cubie-middle-f .cubie-sticker::before {
+		.cubie-middle-f .cubie-sticker.has-title::before {
 			position: absolute;
 			transform-style: preserve-3d;
-			font-size: 35px;
+			font-size: 30px;
 			display: block;
-			transform: translate3d(0, 0, 100px);
+			transform: translate3d(0, -210px, 0);
 			text-shadow: 1px 3px 8px rgba(0, 0, 0, 0.7);
-			color: #fff;
+			color: white;
+			background-color: #091508;
 			font-weight: 600;
 			content: attr(title);
 			pointer-events: none;
+			opacity: 0.8;
+			padding: 5px 15px;
+			border-radius: 5px;
 		}
 	}
 }
